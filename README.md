@@ -24,7 +24,29 @@
 | `app.js` | 화면 전환, 출제, 채점, 저장 전부 |
 | `questions-exam.js` | 2025 성향 영역(짝수형) 문항 26개 |
 | `questions-safety.js` | 안전 지식 문항 84개 (현재는 안 불러온다) |
-| `images/` | 그림 문항(18·23·31번) 삽화 |
+| `images-data.js` | 그림 문항 삽화를 base64로 박아 넣은 자동 생성물 |
+| `images/` | 삽화 원본. 사이트가 읽지 않으므로 올리지 않아도 된다 |
+| `.nojekyll` | GitHub Pages가 Jekyll 처리를 건너뛰게 한다 |
+
+삽화는 파일로 두지 않고 `images-data.js`에 data URI로 박아 넣었다. 호스팅마다
+경로와 대소문자를 다르게 다루는 문제를 아예 없애려는 것이고, 대신 그 파일이
+565KB로 커진다. `index.html`에서 `questions-exam.js`보다 **먼저** 불러와야 한다.
+
+### 삽화 다시 박아 넣기
+
+`images/`의 그림을 바꿨다면 이 파일을 새로 만든다. PowerShell에서:
+
+```powershell
+cd C:\Users\KDZ\esemgosa
+$sb = New-Object System.Text.StringBuilder
+[void]$sb.AppendLine("var IMG = {")
+foreach ($n in 'q18','q23','q31') {
+  $b64 = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("images\$n.jpg"))
+  [void]$sb.AppendLine("  $n`: `"data:image/jpeg;base64,$b64`",")
+}
+[void]$sb.AppendLine("};")
+[System.IO.File]::WriteAllText("images-data.js", $sb.ToString(), (New-Object System.Text.UTF8Encoding $false))
+```
 
 스크립트는 ES 모듈이 아니다. `file://`로 열어도 돌아가게 하려고 일부러 평범한
 `<script>`로 두었다.

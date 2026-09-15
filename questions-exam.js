@@ -26,7 +26,7 @@ var EXAM_QUESTIONS = [
     src: "성향영역 짝수형 18번",
     subject: 4,
     q: "그림에서 대화의 내용을 보고 일치하는 성향을 고르시오.",
-    image: "images/q18.jpg",
+    image: IMG.q18,
     imageNote: ART_CREDIT,
     options: [
       "디그레이더 - 디그레이디",
@@ -124,7 +124,7 @@ var EXAM_QUESTIONS = [
     src: "성향영역 짝수형 23번",
     subject: 4,
     q: "그림에서 대화의 내용과 일치하는 것을 고르시오.",
-    image: "images/q23.jpg",
+    image: IMG.q23,
     imageNote: ART_CREDIT,
     options: [
       "슬레이브는 생각할 수 있다.",
@@ -230,7 +230,7 @@ var EXAM_QUESTIONS = [
     src: "성향영역 짝수형 31번",
     subject: 4,
     q: "그림의 성향과 일치하는 것을 고르시오.",
-    image: "images/q31.jpg",
+    image: IMG.q31,
     imageNote: ART_CREDIT,
     options: [
       "사디스트 - 마조히스트",
